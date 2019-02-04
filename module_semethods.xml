@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_semethods" default="compile.module.semethods">
+  <dirname property="module.semethods.basedir" file="${ant.file.module_semethods}"/>
+  
+  <property name="module.jdk.home.semethods" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.semethods" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.semethods" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.semethods" value="-encoding UTF-8 -source 5 -target 1.5 ${compiler.args}"/>
+  
+  <property name="semethods.output.dir" value="${module.semethods.basedir}/target/classes"/>
+  <property name="semethods.testoutput.dir" value="${module.semethods.basedir}/target/test-classes"/>
+  
+  <path id="semethods.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="semethods.module.production.classpath">
+    <path refid="${module.jdk.classpath.semethods}"/>
+  </path>
+  
+  <path id="semethods.runtime.production.module.classpath">
+    <pathelement location="${semethods.output.dir}"/>
+  </path>
+  
+  <path id="semethods.module.classpath">
+    <path refid="${module.jdk.classpath.semethods}"/>
+    <pathelement location="${semethods.output.dir}"/>
+  </path>
+  
+  <path id="semethods.runtime.module.classpath">
+    <pathelement location="${semethods.testoutput.dir}"/>
+    <pathelement location="${semethods.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.semethods">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.semethods">
+    <patternset refid="excluded.from.module.semethods"/>
+  </patternset>
+  
+  <path id="semethods.module.sourcepath">
+    <dirset dir="${module.semethods.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="semethods.module.test.sourcepath">
+    <dirset dir="${module.semethods.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.semethods" depends="compile.module.semethods.production,compile.module.semethods.tests" description="Compile module seMethods"/>
+  
+  <target name="compile.module.semethods.production" depends="register.custom.compilers" description="Compile module seMethods; production classes">
+    <mkdir dir="${semethods.output.dir}"/>
+    <javac2 destdir="${semethods.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.semethods}/javac">
+      <compilerarg line="${compiler.args.semethods}"/>
+      <bootclasspath refid="semethods.module.bootclasspath"/>
+      <classpath refid="semethods.module.production.classpath"/>
+      <src refid="semethods.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.semethods"/>
+    </javac2>
+    
+    <copy todir="${semethods.output.dir}">
+      <fileset dir="${module.semethods.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.semethods.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.semethods.tests" depends="register.custom.compilers,compile.module.semethods.production" description="compile module seMethods; test classes" unless="skip.tests">
+    <mkdir dir="${semethods.testoutput.dir}"/>
+    <javac2 destdir="${semethods.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.semethods}/javac">
+      <compilerarg line="${compiler.args.semethods}"/>
+      <bootclasspath refid="semethods.module.bootclasspath"/>
+      <classpath refid="semethods.module.classpath"/>
+      <src refid="semethods.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.semethods"/>
+    </javac2>
+    
+    <copy todir="${semethods.testoutput.dir}">
+      <fileset dir="${module.semethods.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.semethods" description="cleanup module">
+    <delete dir="${semethods.output.dir}"/>
+    <delete dir="${semethods.testoutput.dir}"/>
+  </target>
+</project>
