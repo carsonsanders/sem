@@ -2,12 +2,12 @@ package com.napier.sem;
 
 import java.sql.*;
 
-
 /**
  * Represents an employee
  */
 public class Employee
 {
+    private String change = "change";
     /**
      * Employee number
      */
