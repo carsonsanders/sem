@@ -17,11 +17,10 @@ public class Country {
     }
 
 
-    //accessor methods
+    //Accessor methods
     public String getCode() {
         return code;
     }
-
     public void setCode(String code) {
         this.code = code;
     }
@@ -29,7 +28,6 @@ public class Country {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -37,7 +35,6 @@ public class Country {
     public String getContinent() {
         return continent;
     }
-
     public void setContinent(String continent) {
         this.continent = continent;
     }
@@ -45,7 +42,6 @@ public class Country {
     public String getRegion() {
         return region;
     }
-
     public void setRegion(String region) {
         this.region = region;
     }
@@ -53,7 +49,6 @@ public class Country {
     public double getPopulation() {
         return population;
     }
-
     public void setPopulation(double population) {
         this.population = population;
     }
@@ -61,7 +56,6 @@ public class Country {
     public String getCapital() {
         return capital;
     }
-
     public void setCapital(String capital) {
         this.capital = capital;
     }
