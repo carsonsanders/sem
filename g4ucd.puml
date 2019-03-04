@@ -1,0 +1,86 @@
+@startuml
+
+actor HR as "HR Person"
+
+rectangle Database
+
+rectangle "Report system" {
+
+    usecase UC1 as "Get population of countries in the world, largest to smallest"
+
+    usecase UCa as "Print list of countries"
+
+    HR - UC1
+    UC1 - Database
+
+    usecase UC2 as "Get population of countries in a continent, largest to smallest"
+
+    UC1 ..> UC2 : extends
+
+    usecase UC3 as "Get population of countries in a region, largest to smallest"
+
+    UC2 ..> UC3 : extends
+    UC3 ..> UCa : include
+
+    usecase UC4 as "Get N most populated countries in the world"
+
+    UC1 ..> UC4 : extends
+
+    usecase UC5 as "Get N most populated countries in a continent"
+
+    UC4 ..> UC5 : extends
+
+    usecase UC6 as "Get N most populated countries in a region"
+
+    UC5 ..> UC6 : extends
+    UC6 ..> UCa : include
+
+    usecase UC7 as "Get population of cities in the world, largest to smallest"
+
+    usecase UCb as "Print list of cities"
+
+    HR - UC7
+    UC7 - Database
+
+    usecase UC8 as "Get population of cities in a continent, largest to smallest"
+
+    UC7 ..> UC8 : extend
+
+    usecase UC9 as "Get population of cities in a region, largest to smallest"
+
+    UC8 ..> UC9 : extend
+
+    usecase UC10 as "Get population of cities in a country, largest to smallest"
+
+    UC9 ..> UC10 : extend
+
+    usecase UC11 as "Get population of cities in a district, largest to smallest"
+
+    UC10 ..> UC11 : extend
+    UC11 ..> UCb : include
+
+    usecase UC12 as "Get N most populated cities in the world"
+
+    UC7 ..> UC12 : extend
+
+    usecase UC13 as "Get N most populated cities in a continent"
+
+    UC12 ..> UC13 : extend
+
+    usecase UC14 as "Get N most populated cities in a region"
+
+    UC13 ..> UC14 : extend
+
+    usecase UC15 as "Get N most populated cities in a country"
+
+    UC14 ..> UC15 : extend
+
+    usecase UC16 as "Get N most populated cities in a district"
+
+    UC15 ..> UC16 : extend
+    UC16 ..> UCb : include
+
+
+}
+
+@enduml
