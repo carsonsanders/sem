@@ -13,7 +13,7 @@ public class Country {
 
 
     //Default constructor
-    Country(){
+    public Country(){
     }
 
 
@@ -21,22 +21,26 @@ public class Country {
     public String getCode() {
         return code;
     }
-    public void setCode(String code) {
-        this.code = code;
+    public void setCode(String code){
+            this.code= code;
     }
 
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) throws InputValidationException {
+        if (name.matches("^(?=.{2,35}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")) {
+            this.name= name;
+        } else throw new InputValidationException();
     }
 
     public String getContinent() {
         return continent;
     }
-    public void setContinent(String continent) {
-        this.continent = continent;
+    public void setContinent(String continent)throws InputValidationException {
+        if (name.matches("^(?=.{2,20}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")) {
+            this.continent= continent;
+        } else throw new InputValidationException();
     }
 
     public String getRegion() {
