@@ -87,26 +87,26 @@ class AssessmentTest
 
 
         try {
-            testCountry.setName("South America");
+            testCountry.setContinent("South America");
         }catch (InputValidationException e ) {
             fail("Should not throw an exception");
         }
 
         try {
-            testCountry.setName("1Asia");
+            testCountry.setContinent("1Asia");
             fail("Name should start with a letter");
         } catch (InputValidationException e) {
         }
 
         try {
-            testCountry.setName("A");
+            testCountry.setContinent("A");
             fail("Should not allow less than two characters");
         } catch (InputValidationException e) {
 
         }
 
         try {
-            testCountry.setName("abcdefghijklmnopqrstxyzabcdefgh");
+            testCountry.setContinent("abcdefghijklmnopqrstxyzabcdefgh");
             fail("Should not be longer than 20 characters");
         } catch (InputValidationException e) {
 
