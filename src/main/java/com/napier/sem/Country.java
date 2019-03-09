@@ -38,7 +38,7 @@ public class Country {
         return continent;
     }
     public void setContinent(String continent)throws InputValidationException {
-        if (name.matches("^(?=.{2,20}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")) {
+        if (continent.matches("^(?=.{2,20}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")) {
             this.continent= continent;
         } else throw new InputValidationException();
     }
