@@ -11,10 +11,12 @@ public class App
         App a = new App();
 
         // Connect to database
-        a.connect();
+        a.connect("localhost:33060");
 
         // Extract employee salary information
         ArrayList<Country> countries = a.getAllCountries();
+        System.out.println(countries);
+
 
         // Test the size of the returned data - should be 240124
         System.out.println(countries.size());
@@ -27,7 +29,7 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
+    public void connect(String location)
     {
         try
         {
@@ -40,7 +42,7 @@ public class App
             System.exit(-1);
         }
 
-        int retries = 10;
+        int retries = 1;
         for (int i = 0; i < retries; ++i)
         {
             System.out.println("Connecting to database...");
@@ -49,7 +51,7 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -95,7 +97,7 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Query to select all countries
-            String SQL = "SELECT * FROM Country";
+            String SQL = "SELECT * FROM country";
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(SQL);
 
@@ -104,14 +106,13 @@ public class App
 
             while (rs.next())
             {
-
                 Country count = new Country();
-                count.setCode(rs.getString("Country.Code"));
-                count.setName(rs.getString("Country.Name"));
-                count.setContinent(rs.getString("Country.Continent"));
-                count.setRegion(rs.getString("Country.Region"));
-                count.setPopulation(rs.getInt("Country.Population"));
-                count.setCapital(rs.getString("Country.Capital"));
+                count.setCode(rs.getString("country.Code"));
+                count.setName(rs.getString("country.Name"));
+                count.setContinent(rs.getString("country.Continent"));
+                count.setRegion(rs.getString("country.Region"));
+                count.setPopulation(rs.getInt("country.Population"));
+                count.setCapital(rs.getString("country.Capital"));
 
                 //Add country to Arraylist
                 countryList.add(count);
@@ -121,7 +122,7 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get salary details");
+            System.out.println("Failed to get data");
             return null;
         }
     }

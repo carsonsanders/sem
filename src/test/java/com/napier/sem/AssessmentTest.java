@@ -1,3 +1,5 @@
+package com.napier.sem;
+
 import com.napier.sem.Country;
 import com.napier.sem.InputValidationException;
 import org.junit.jupiter.api.*;
