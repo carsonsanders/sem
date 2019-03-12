@@ -9,6 +9,7 @@ public class App
     {
         // Create new Application
         App a = new App();
+        System.out.println("this is a string");
 
         // Connect to database
         a.connect();
@@ -18,6 +19,7 @@ public class App
 
         // Test the size of the returned data - should be 240124
         System.out.println(countries.size());
+
 
         // Disconnect from database
         a.disconnect();
@@ -49,7 +51,7 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
