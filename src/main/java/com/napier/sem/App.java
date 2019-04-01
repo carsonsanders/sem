@@ -90,6 +90,7 @@ public class App
      * Gets all the current employees and salaries.
      * @return A list of all employees and salaries, or null if there is an error.
      */
+
     public ArrayList<Country> getAllCountries()
     {
         try
@@ -127,6 +128,7 @@ public class App
             return null;
         }
     }
+
 
 
 
