@@ -9,15 +9,17 @@ public class App
     {
         // Create new Application
         App a = new App();
+        System.out.println("this is a string");
 
         // Connect to database
-        a.connect();
+        a.connect("db:33060");
 
         // Extract employee salary information
         ArrayList<Country> countries = a.getAllCountries();
 
         // Test the size of the returned data - should be 240124
         System.out.println(countries.size());
+
 
         // Disconnect from database
         a.disconnect();
@@ -27,12 +29,12 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
+    public void connect(String location)
     {
         try
         {
             // Load Database driver
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
         {
@@ -49,7 +51,7 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -95,7 +97,7 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Query to select all countries
-            String SQL = "SELECT * FROM Country";
+            String SQL = "SELECT * FROM country";
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(SQL);
 
@@ -106,12 +108,12 @@ public class App
             {
 
                 Country count = new Country();
-                count.setCode(rs.getString("Country.Code"));
-                count.setName(rs.getString("Country.Name"));
-                count.setContinent(rs.getString("Country.Continent"));
-                count.setRegion(rs.getString("Country.Region"));
-                count.setPopulation(rs.getInt("Country.Population"));
-                count.setCapital(rs.getString("Country.Capital"));
+                count.setCode(rs.getString("country.Code"));
+                count.setName(rs.getString("country.Name"));
+                count.setContinent(rs.getString("country.Continent"));
+                count.setRegion(rs.getString("country.Region"));
+                count.setPopulation(rs.getInt("country.Population"));
+                count.setCapital(rs.getString("country.Capital"));
 
                 //Add country to Arraylist
                 countryList.add(count);
