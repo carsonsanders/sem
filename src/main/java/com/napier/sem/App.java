@@ -109,12 +109,12 @@ public class App
             {
 
                 Country count = new Country();
-                count.setCode(rs.getString("country.Code"));
-                count.setName(rs.getString("country.Name"));
-                count.setContinent(rs.getString("country.Continent"));
-                count.setRegion(rs.getString("country.Region"));
-                count.setPopulation(rs.getInt("country.Population"));
-                count.setCapital(rs.getString("country.Capital"));
+                count.setCode(rs.getString("Code"));
+                count.setName(rs.getString("Name"));
+                count.setContinent(rs.getString("Continent"));
+                count.setRegion(rs.getString("Region"));
+                count.setPopulation(rs.getInt("Population"));
+                count.setCapital(rs.getString("Capital"));
 
                 //Add country to Arraylist
                 countryList.add(count);
