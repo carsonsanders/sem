@@ -14,7 +14,7 @@ services:
   - docker
 
 install:
-  - docker build -t database worldDb/.
+  - docker build -t database worlddb/.
   - docker run --rm -d -e MYSQL_ROOT_PASSWORD=example -p 33060:3306 database
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
@@ -46,9 +46,9 @@ jobs:
         # Authenticate against Google's Docker image manager.
         - gcloud auth configure-docker
         # Build the database image.
-        - docker build -t gcr.io/${semethods-236313}/worldDb worldDb/.
+        - docker build -t gcr.io/${semethods-236313}/worlddb worlddb/.
         # Push the database image.
-        - docker push gcr.io/${semethods-236313}/worldDb
+        - docker push gcr.io/${semethods-236313}/worlddb
         # Create a container cluster.  We only need one node.
         - gcloud container clusters create hr-cluster --num-nodes=1
         # Tell kubernetes to run the built database image, opening port 3306
