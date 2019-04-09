@@ -1,7 +1,15 @@
 package com.napier.sem;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+@SpringBootApplication
+@RestController
 
 public class App
 {
@@ -9,27 +17,34 @@ public class App
     {
         // Create new Application
         App a = new App();
-        System.out.println("this is a string");
-
         // Connect to database
-        a.connect("db:33060");
+        if (args.length < 1)
+        {
+            connect("localhost:33060");
+        }
+        else
+        {
+            connect(args[0]);
+        }
+
+        SpringApplication.run(App.class, args);
 
         // Extract employee salary information
-        ArrayList<Country> countries = a.getAllCountries();
+       // ArrayList<Country> countries = a.getAllCountries();
 
         // Test the size of the returned data - should be 240124
-        System.out.println(countries.size());
+        //System.out.println(countries.size());
 
 
         // Disconnect from database
-        a.disconnect();
+       // a.disconnect();
     }
-    private Connection con = null;
+    private static Connection con = null;
 
     /**
      * Connect to the MySQL database.
      */
-    public void connect(String location)
+    public static void connect(String location)
     {
         try
         {
@@ -70,7 +85,7 @@ public class App
     /**
      * Disconnect from the MySQL database.
      */
-    public void disconnect()
+    public static void disconnect()
     {
         if (con != null)
         {
