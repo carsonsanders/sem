@@ -1,9 +1,9 @@
 package com.napier.sem;
 
-import com.sun.org.apache.xalan.internal.lib.ExsltBase;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+
 
 import java.util.ArrayList;
 
@@ -17,19 +17,16 @@ public class AppIntegrationTest
     static void init()
     {
         app = new App();
-        app.connect("db:33060");
+        app.connect("localhost:33060");
     }
 
     @Test
     void testGetCountries()
     {
-        try {
+           Country testCou = new Country();
 
-            ArrayList<Country> cList = app.getAllCountries();
-        } catch(Exception e){
+            ArrayList<Country> cList = testCou.getAllCountries();
 
-            fail("Should not throw an exception");
-        }
     }
 
 

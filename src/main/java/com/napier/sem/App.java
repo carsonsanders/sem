@@ -39,7 +39,7 @@ public class App
         // Disconnect from database
        // a.disconnect();
     }
-    private static Connection con = null;
+    public static Connection con = null;
 
     /**
      * Connect to the MySQL database.
@@ -100,52 +100,5 @@ public class App
             }
         }
     }
-
-    /**
-     * Gets all the current employees and salaries.
-     * @return A list of all employees and salaries, or null if there is an error.
-     */
-
-    public ArrayList<Country> getAllCountries()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Query to select all countries
-            String SQL = "SELECT * FROM country";
-            // Execute SQL statement
-            ResultSet rs = stmt.executeQuery(SQL);
-
-            // Extract employee information
-            ArrayList<Country> countryList = new ArrayList<Country>();
-
-            while (rs.next())
-            {
-
-                Country count = new Country();
-                count.setCode(rs.getString("Code"));
-                count.setName(rs.getString("Name"));
-                count.setContinent(rs.getString("Continent"));
-                count.setRegion(rs.getString("Region"));
-                count.setPopulation(rs.getInt("Population"));
-                count.setCapital(rs.getString("Capital"));
-
-                //Add country to Arraylist
-                countryList.add(count);
-            }
-            return countryList;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to extract data");
-            return null;
-        }
-    }
-
-
-
-
 
 }

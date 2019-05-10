@@ -1,5 +1,8 @@
 package com.napier.sem;
 
+import java.sql.*;
+import java.util.ArrayList;
+
 public class Country {
 
 
@@ -9,6 +12,7 @@ public class Country {
     private String region;
     private int population;
     private String capital;
+    private ArrayList<Country> countryList = new ArrayList<Country>();
 
 
     //Default constructor
@@ -20,37 +24,28 @@ public class Country {
     public String getCode() {
         return code;
     }
-    public void setCode(String code) throws InputValidationException {
-        if (code.matches("\\b[A-Z]{3}\\b")) {
+    public void setCode(String code) {
             this.code = code;
-        } else throw new InputValidationException();
     }
 
     public String getName() {
         return name;
     }
-    public void setName(String name) throws InputValidationException {
-        if (name.matches("^(?=.{2,35}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")) {
+    public void setName(String name) {
             this.name = name;
-        } else throw new InputValidationException();
     }
 
     public String getContinent() {
         return continent;
     }
-    public void setContinent(String continent) throws InputValidationException {
-        if (continent.matches("^(?=.{2,20}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")) {
-            this.continent = continent;
-        } else throw new InputValidationException();
+    public void setContinent(String continent) {
+           this.continent = continent;
     }
-
     public String getRegion() {
         return region;
     }
-    public void setRegion(String region) throws InputValidationException {
-        if (region.matches("^(?=.{2,30}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")) {
-            this.region = region;
-        } else throw new InputValidationException();
+    public void setRegion(String region) {
+       this.region = region;
     }
 
     public double getPopulation() {
@@ -67,5 +62,46 @@ public class Country {
         this.capital = capital;
     }
 
+
+    /**
+     * @return A list of all countries
+     */
+    public ArrayList<Country> getAllCountries()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = App.con.createStatement();
+            // Query to select all countries
+            String SQL = "SELECT * FROM country";
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(SQL);
+
+            // Extract employee information
+            ArrayList<Country> countryList = new ArrayList<Country>();
+
+            while (rs.next())
+            {
+
+                Country count = new Country();
+                count.setCode(rs.getString("Code"));
+                count.setName(rs.getString("Name"));
+                count.setContinent(rs.getString("Continent"));
+                count.setRegion(rs.getString("Region"));
+                count.setPopulation(rs.getInt("Population"));
+                count.setCapital(rs.getString("Capital"));
+
+                //Add country to Arraylist
+                countryList.add(count);
+            }
+            return countryList;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to extract data");
+            return null;
+        }
+    }
 
 }
