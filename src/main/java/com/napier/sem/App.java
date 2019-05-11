@@ -18,18 +18,17 @@ public class App
     {
         // Create new Application
         App a = new App();
-        // Connect to d atabase
+        // Connect to database
         if (args.length < 1)
         {
-            a.connect("localhost:33060");
+            a.connect("localhost:3306");
         }
         else
         {
             a.connect(args[0]);
         }
 
-        SpringApplication.run(App.class, args);
-
+        
     }
 
     public static Connection con = null;
@@ -59,7 +58,9 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://"+ location +"/world?allowPublicKeyRetrieval=true&useSSL=false",
+                                                  "root",
+                                                  "");
                 System.out.println("Successfully connected");
                 break;
             }

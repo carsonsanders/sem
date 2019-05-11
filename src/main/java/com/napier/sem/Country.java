@@ -66,8 +66,11 @@ public class Country {
     /**
      * @return A list of all countries
      */
-    public ArrayList<Country> getAllCountries()
-    {
+    public ArrayList<Country> getCountries(String category) {
+
+        countryList.clear();
+
+        if(category=="world") {
         try
         {
             // Create an SQL statement
@@ -92,6 +95,37 @@ public class Country {
             System.out.println("Failed to extract data");
             return null;
         }
+
+        }
+
+        else if(category=="region"){
+
+            try
+            {
+                // Create an SQL statement
+                Statement stmt = App.con.createStatement();
+                // Query to select all countries
+                String query = "SELECT * FROM country"
+                        +"ORDER BY population DESC;";
+                // Execute SQL statement
+                ResultSet rs = stmt.executeQuery(query);
+
+                while (rs.next())
+                {
+                    //Add country to countrylist
+                    countryList.add(newCountry(rs));
+                }
+
+                return countryList;
+            }
+            catch (Exception e)
+            {
+                System.out.println(e.getMessage());
+                System.out.println("Failed to extract data");
+                return null;
+            }
+        }
+        return null;
     }
 
 
