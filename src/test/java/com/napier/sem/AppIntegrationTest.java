@@ -23,9 +23,7 @@ public class AppIntegrationTest
     @Test
     void testGetCountries()
     {
-           Country testCou = new Country();
 
-            ArrayList<Country> cList = testCou.getAllCountries();
 
     }
 

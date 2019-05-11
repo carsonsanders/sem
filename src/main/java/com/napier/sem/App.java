@@ -13,32 +13,25 @@ import java.util.ArrayList;
 
 public class App
 {
+
     public static void main(String[] args)
     {
         // Create new Application
         App a = new App();
-        // Connect to database
+        // Connect to d atabase
         if (args.length < 1)
         {
-            connect("localhost:33060");
+            a.connect("localhost:33060");
         }
         else
         {
-            connect(args[0]);
+            a.connect(args[0]);
         }
 
         SpringApplication.run(App.class, args);
 
-        // Extract employee salary information
-       // ArrayList<Country> countries = a.getAllCountries();
-
-        // Test the size of the returned data - should be 240124
-        //System.out.println(countries.size());
-
-
-        // Disconnect from database
-       // a.disconnect();
     }
+
     public static Connection con = null;
 
     /**

@@ -73,27 +73,17 @@ public class Country {
             // Create an SQL statement
             Statement stmt = App.con.createStatement();
             // Query to select all countries
-            String SQL = "SELECT * FROM country";
+            String query = "SELECT * FROM country"
+                         +"ORDER BY population DESC;";
             // Execute SQL statement
-            ResultSet rs = stmt.executeQuery(SQL);
-
-            // Extract employee information
-            ArrayList<Country> countryList = new ArrayList<Country>();
+            ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next())
             {
-
-                Country count = new Country();
-                count.setCode(rs.getString("Code"));
-                count.setName(rs.getString("Name"));
-                count.setContinent(rs.getString("Continent"));
-                count.setRegion(rs.getString("Region"));
-                count.setPopulation(rs.getInt("Population"));
-                count.setCapital(rs.getString("Capital"));
-
-                //Add country to Arraylist
-                countryList.add(count);
+                //Add country to countrylist
+                countryList.add(newCountry(rs));
             }
+
             return countryList;
         }
         catch (Exception e)
@@ -104,4 +94,18 @@ public class Country {
         }
     }
 
+
+    //Returns country object created from result set data
+    public Country newCountry(ResultSet rs) throws SQLException {
+
+        Country cout = new Country();
+        cout.setCode(rs.getString("Code"));
+        cout.setName(rs.getString("Name"));
+        cout.setContinent(rs.getString("Continent"));
+        cout.setRegion(rs.getString("Region"));
+        cout.setPopulation(rs.getInt("Population"));
+        cout.setCapital(rs.getString("Capital"));
+        return cout;
+
+    }
 }
