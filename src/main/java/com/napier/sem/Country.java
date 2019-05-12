@@ -148,7 +148,7 @@ public class Country {
                     Statement stmt = App.con.createStatement();
                     // Query to select all countries
                     String query = "SELECT * FROM country " +
-                            "WHERE country.Region ='"+name+"'" +
+                            "WHERE country.Region ='" + name + "'" +
                             "ORDER BY population DESC";
 
                     // Execute SQL statement

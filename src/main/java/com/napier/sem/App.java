@@ -111,13 +111,39 @@ public class App {
                 clearScreen();
                 countryScreen();
 
+                //Country Switch
                 switch (scanner.next()){
 
-                    case"1": newRep.countriesInWorldReport();
-                             break;
 
+                    //..in the world
+                    case"1":
+                        System.out.println("Would you like to limit results to see a specified number of countries?");
+                        System.out.println("1. Yes");
+                        System.out.println("2. No");
+                      switch (scanner.next()){
+
+                          case"1":
+
+                              System.out.println("How many countries would you like to limit the report to? Enter1 Number below");
+                              int limit = Integer.parseInt(scanner.next());
+                              newRep.countriesInWorldReport(limit);
+                              break;
+
+                          case"2":
+                              newRep.countriesInWorldReport(0);
+                              break;
+
+                          default:
+                              System.out.println("Please enter 1 for Yes or 2 for No");
+
+                      }
+                        break;
+
+                    // ..in a continent
+                    //user is prompted to choose a continent
                     case"2": continentScreen();
 
+                        //user is prompted to choose a continent
                          switch (scanner.next()){
 
                              case "1": newRep.countriesInContinentReport("Africa");
@@ -135,11 +161,85 @@ public class App {
                          }
                          break;
 
+                    // ..in a region
+                    //user is prompted to type region name
+                    case"3":
+
+                             //limit region report to a specified number of countries
+                             System.out.println("Would you like to limit results to see a specified number of countries?");
+                             System.out.println("1. Yes");
+                             System.out.println("2. No");
+
+                        switch (scanner.next()){
+
+                            case"1":
+
+                                System.out.println("How many countries would you like to limit the report to? Enter a Number below");
+                                int limit = Integer.parseInt(scanner.next());
+                                System.out.println("Please type the name of the Region :");
+                                String rgn = scanner.next();
+                                newRep.countriesInRegionReport(rgn,limit);
+                                break;
+
+                            case"2":
+
+                                System.out.println("Please type the name of the Region :");
+                                newRep.countriesInRegionReport(scanner.next(),0);
+                                break;
+
+                            default:
+                                System.out.println("Please enter 1 for Yes or 2 for No");
+
+                        }
+                        break;
                 }
                 break;
 
             //All the cities in the ...
             case "2":
+
+                clearScreen();
+                cityScreen();
+
+                switch (scanner.next()){
+
+                    //..in the world
+                    case"1":
+                        System.out.println("Would you like to limit results to see a specified number of cities?");
+                        System.out.println("1. Yes");
+                        System.out.println("2. No");
+                        switch (scanner.next()){
+
+                            case"1":
+
+                                System.out.println("How many cities would you like to limit the report to? Enter Number below");
+                                int limit = Integer.parseInt(scanner.next());
+                                newRep.citiesInWorldReport(limit);
+                                break;
+
+                            case"2":
+                                newRep.citiesInWorldReport(0);
+                                break;
+
+                            default:
+                                System.out.println("Please enter 1 for Yes or 2 for No");
+
+                        }
+                        break;
+
+                    //,,in the continent
+                    case"2":
+
+
+
+
+                }
+
+                default:
+                    System.out.println("Please enter a valid selection");
+
+
+
         }
 
     }
@@ -163,7 +263,9 @@ public class App {
     public void countryScreen() {
 
         //Display country menu options
-        System.out.println("Would you like a population report on..");
+        System.out.println("\n");
+        System.out.println("Country report selection : ");
+        System.out.println("\n");
         System.out.println("1. All the countries in the World");
         System.out.println("2. All the countries in a Continent");
         System.out.println("3. All the countries in a Region");
@@ -171,10 +273,25 @@ public class App {
 
     }
 
+    public void cityScreen() {
+
+        //Display country menu options
+        System.out.println("\n");
+        System.out.println("City report selection : ");
+        System.out.println("\n");
+        System.out.println("1. All the cities in the World");
+        System.out.println("2. All the cities in a Continent");
+        System.out.println("3. All the cities in a Region");
+        System.out.println("Press 'x' to exit");
+
+    }
+
     public void continentScreen() {
 
         //Display country menu options
+        System.out.println("\n");
         System.out.println("Choose a continent :");
+        System.out.println("\n");
         System.out.println("1. Africa");
         System.out.println("2. Asia");
         System.out.println("3. Europe");
@@ -184,19 +301,6 @@ public class App {
 
     }
 
-
-    public void regionScreen() {
-
-        //Display country menu options
-        System.out.println("Choose a region :");
-        System.out.println("1. Africa");
-        System.out.println("2. Asia");
-        System.out.println("3. Europe");
-        System.out.println("4. North America");
-        System.out.println("5. South America");
-        System.out.println("6. Oceania");
-
-    }
 
     public static void clearScreen() {
 

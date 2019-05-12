@@ -54,35 +54,101 @@ public class City {
     /**
      * @return A list of all cities
      */
-    public ArrayList<City> getCities(String category)
+    public ArrayList<City> getCities(String inThe, String name)
     {
         cityList.clear();
 
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = App.con.createStatement();
-            // Query to select all countries
-            String query = "SELECT * FROM city " +
-                           "ORDER BY population DESC";
 
-            // Execute SQL statement
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next())
+        if(inThe=="world"&& (name==null)) {
+            try
             {
-                //Add cities from results to citylist
-                cityList.add(newCity(rs));
+                // Create an SQL statement
+                Statement stmt = App.con.createStatement();
+                // Query to select all countries
+                String query = "SELECT * FROM city " +
+                        "ORDER BY population DESC";
+                // Execute SQL statement
+                ResultSet rs = stmt.executeQuery(query);
+
+                while (rs.next())
+                {
+                    //Add country to countrylist
+                    cityList.add(newCity(rs));
+                }
+
+                return cityList;
+            }
+            catch (Exception e)
+            {
+                System.out.println(e.getMessage());
+                System.out.println("Failed to extract data");
+                return null;
             }
 
-            return cityList;
         }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to extract data");
-            return null;
+
+        //if parameters are region and name is not null
+        else if(inThe=="continent" && !(name==null)) {
+
+            try {
+                // Create an SQL statement
+                Statement stmt = App.con.createStatement();
+                // Query to select all countries
+                String query = "SELECT * FROM city " +
+                        "WHERE city.Continent ='" + name + "'" +
+                        "ORDER BY population DESC";
+
+                // Execute SQL statement
+
+                ResultSet rs = stmt.executeQuery(query);
+
+                while (rs.next()) {
+                    //Add country to countrylist
+                    cityList.add(newCity(rs));
+                }
+
+                return cityList;
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Failed to extract data");
+                return null;
+            }
         }
+
+        //if parameters are region and name is not null
+        else if(inThe=="region" && !(name==null)){
+
+            try
+            {
+                // Create an SQL statement
+                Statement stmt = App.con.createStatement();
+                // Query to select all countries
+                String query = "SELECT * FROM city " +
+                        "WHERE city.Region ='" + name + "'" +
+                        "ORDER BY population DESC";
+
+                // Execute SQL statement
+
+                ResultSet rs = stmt.executeQuery(query);
+
+                while (rs.next())
+                {
+                    //Add country to countrylist
+                    cityList.add(newCity(rs));
+                }
+
+                return cityList;
+            }
+            catch (Exception e)
+            {
+                System.out.println(e.getMessage());
+                System.out.println("Failed to extract data");
+                return null;
+            }
+        }
+        return null;
+
     }
 
 
