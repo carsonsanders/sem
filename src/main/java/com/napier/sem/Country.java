@@ -137,6 +137,7 @@ public class Country {
                 System.out.println("Failed to extract data");
                 return null;
             }
+
         }
 
             //if parameters are region and name is not null

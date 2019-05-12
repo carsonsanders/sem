@@ -108,7 +108,6 @@ public class App {
             //All the countries in the ...
             case "1":
 
-                clearScreen();
                 countryScreen();
 
                 //Country Switch
@@ -134,7 +133,8 @@ public class App {
                               break;
 
                           default:
-                              System.out.println("Please enter 1 for Yes or 2 for No");
+                              System.out.println("Invalid input");
+                              reportSelection();
 
                       }
                         break;
@@ -188,7 +188,8 @@ public class App {
                                 break;
 
                             default:
-                                System.out.println("Please enter 1 for Yes or 2 for No");
+                                System.out.println("Invalid Input");
+                                reportSelection();
 
                         }
                         break;
@@ -198,13 +199,14 @@ public class App {
             //All the cities in the ...
             case "2":
 
-                clearScreen();
                 cityScreen();
 
+                //City Switch
                 switch (scanner.next()){
 
                     //..in the world
                     case"1":
+
                         System.out.println("Would you like to limit results to see a specified number of cities?");
                         System.out.println("1. Yes");
                         System.out.println("2. No");
@@ -222,22 +224,74 @@ public class App {
                                 break;
 
                             default:
-                                System.out.println("Please enter 1 for Yes or 2 for No");
+                                System.out.println("Invalid Input");
+                                reportSelection();
 
                         }
                         break;
 
-                    //,,in the continent
+                    //...in a continent
                     case"2":
+                          continentScreen();
 
+                        switch (scanner.next()){
 
+                            case "1": newRep.citiesInContinentReport("Africa");
+                                break;
+                            case "2": newRep.citiesInContinentReport("Asia");
+                                break;
+                            case "3": newRep.citiesInContinentReport("Europe");
+                                break;
+                            case "4": newRep.citiesInContinentReport("North America");
+                                break;
+                            case "5": newRep.citiesInContinentReport("South America");
+                                break;
+                            case "6": newRep.citiesInContinentReport("Oceania");
+                                break;
+                        }
+                        break;
+
+                    //...in a region
+                    case"3":
+
+                        //limit region report to a specified number of countries
+                        System.out.println("Would you like to limit results to see a specified number of countries?");
+                        System.out.println("1. Yes");
+                        System.out.println("2. No");
+
+                        switch (scanner.next()){
+
+                            case"1":
+
+                                System.out.println("How many countries would you like to limit the report to? Enter a Number below");
+                                int limit = Integer.parseInt(scanner.next());
+                                System.out.println("Please type the name of the Region :");
+                                newRep.citiesInRegionReport(scanner.next(),limit);
+                                break;
+
+                            case"2":
+
+                                System.out.println("Please type the name of the Region :");
+                                newRep.countriesInRegionReport(scanner.next(),0);
+                                break;
+
+                            default:
+                                System.out.println("Invalid Input");
+                                reportSelection();
+
+                        }
+                        break;
 
 
                 }
+                break;
 
+                //case"3": Capital city
+
+                //Default Option if invalid entry
                 default:
                     System.out.println("Please enter a valid selection");
-
+                    reportSelection();
 
 
         }
@@ -262,6 +316,7 @@ public class App {
 
     public void countryScreen() {
 
+        clearScreen();
         //Display country menu options
         System.out.println("\n");
         System.out.println("Country report selection : ");
@@ -275,6 +330,7 @@ public class App {
 
     public void cityScreen() {
 
+        clearScreen();
         //Display country menu options
         System.out.println("\n");
         System.out.println("City report selection : ");
@@ -303,6 +359,11 @@ public class App {
 
 
     public static void clearScreen() {
+
+        for(int i=0;i<50;i++){
+
+            System.out.println("\n");
+        }
 
     }
 
