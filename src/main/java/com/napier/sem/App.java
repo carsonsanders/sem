@@ -27,10 +27,7 @@ public class App {
         }
 
        PrintReports rep = new PrintReports();
-
-        
-        rep.countriesInWorldReport();
-        rep.citiesInWorldReport();
+        rep.countriesInRegionReport("Eastern Asia");
 
 
     }

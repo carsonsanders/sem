@@ -74,20 +74,23 @@ public class Country {
 
 
     /**
-     * @return A list of all countries
+     * @param inThe : different categories of reports (world,continent or region)
+     *  @param  name :  name of region or continent (required if either of those categories are chosen)
+     *
+     * @return A list of countries using the specified parameters
      */
-    public ArrayList<Country> getCountries(String category) {
+    public ArrayList<Country> getCountries(String inThe, String name) {
 
         countryList.clear();
 
-        if(category=="world") {
+        if(inThe=="world"&& (name==null)) {
         try
         {
             // Create an SQL statement
             Statement stmt = App.con.createStatement();
             // Query to select all countries
             String query = "SELECT * FROM country " +
-                    "ORDER BY population DESC";
+                           "ORDER BY population DESC";
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(query);
 
@@ -108,32 +111,64 @@ public class Country {
 
         }
 
-        else if(category=="region"){
+        //if parameters are region and name is not null
+        else if(inThe=="continent" && !(name==null)) {
 
-            try
-            {
+            try {
                 // Create an SQL statement
                 Statement stmt = App.con.createStatement();
                 // Query to select all countries
-                String query = "";
+                String query = "SELECT * FROM country " +
+                        "WHERE country.Continent ='" + name + "'" +
+                        "ORDER BY population DESC";
 
                 // Execute SQL statement
+
                 ResultSet rs = stmt.executeQuery(query);
 
-                while (rs.next())
-                {
+                while (rs.next()) {
                     //Add country to countrylist
                     countryList.add(newCountry(rs));
                 }
 
                 return countryList;
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
                 System.out.println("Failed to extract data");
                 return null;
             }
+        }
+
+            //if parameters are region and name is not null
+        else if(inThe=="region" && !(name==null)){
+
+                try
+                {
+                    // Create an SQL statement
+                    Statement stmt = App.con.createStatement();
+                    // Query to select all countries
+                    String query = "SELECT * FROM country " +
+                            "WHERE country.Region ='"+name+"'" +
+                            "ORDER BY population DESC";
+
+                    // Execute SQL statement
+
+                    ResultSet rs = stmt.executeQuery(query);
+
+                    while (rs.next())
+                    {
+                        //Add country to countrylist
+                        countryList.add(newCountry(rs));
+                    }
+
+                    return countryList;
+                }
+                catch (Exception e)
+                {
+                    System.out.println(e.getMessage());
+                    System.out.println("Failed to extract data");
+                    return null;
+                }
         }
         return null;
     }
