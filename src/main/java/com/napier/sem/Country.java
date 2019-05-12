@@ -12,6 +12,9 @@ public class Country {
     private String region;
     private int population;
     private String capital;
+
+
+
     private ArrayList<Country> countryList = new ArrayList<Country>();
 
 
@@ -62,6 +65,13 @@ public class Country {
         this.capital = capital;
     }
 
+    public ArrayList<Country> getCountryList() {
+        return countryList;
+    }
+    public void setCountryList(ArrayList<Country> countryList) {
+        this.countryList = countryList;
+    }
+
 
     /**
      * @return A list of all countries
@@ -76,8 +86,8 @@ public class Country {
             // Create an SQL statement
             Statement stmt = App.con.createStatement();
             // Query to select all countries
-            String query = "SELECT * FROM country"
-                         +"ORDER BY population DESC;";
+            String query = "SELECT * FROM country " +
+                    "ORDER BY population DESC";
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(query);
 
@@ -105,8 +115,8 @@ public class Country {
                 // Create an SQL statement
                 Statement stmt = App.con.createStatement();
                 // Query to select all countries
-                String query = "SELECT * FROM country"
-                        +"ORDER BY population DESC;";
+                String query = "";
+
                 // Execute SQL statement
                 ResultSet rs = stmt.executeQuery(query);
 
@@ -142,4 +152,5 @@ public class Country {
         return cout;
 
     }
+
 }

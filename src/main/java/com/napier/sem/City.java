@@ -22,7 +22,6 @@ public class City {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -30,7 +29,6 @@ public class City {
     public String getCountry() {
         return country;
     }
-
     public void setCountry(String country) {
         this.country = country;
     }
@@ -38,7 +36,6 @@ public class City {
     public String getDistrict() {
         return district;
     }
-
     public void setDistrict(String district) {
         this.district = district;
     }
@@ -46,24 +43,28 @@ public class City {
     public int getPopulation() {
         return population;
     }
-
     public void setPopulation(int population) {
         this.population = population;
     }
 
+    public ArrayList<City> getCityList() {
+        return cityList;
+    }
 
     /**
      * @return A list of all cities
      */
-    public ArrayList<City> getAllCities()
+    public ArrayList<City> getCities(String category)
     {
+        cityList.clear();
+
         try
         {
             // Create an SQL statement
             Statement stmt = App.con.createStatement();
             // Query to select all countries
-            String query = "SELECT * FROM city"
-                    +"ORDER BY population DESC;";
+            String query = "SELECT * FROM city " +
+                           "ORDER BY population DESC";
 
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(query);
@@ -85,12 +86,12 @@ public class City {
     }
 
 
-    //Returns country object created from result set data
+    //Returns city object created from result set data
     public City newCity(ResultSet rs) throws SQLException {
 
         City city = new City();
         city.setName(rs.getString("Name"));
-        city.setCountry(rs.getString("Country"));
+        city.setCountry(rs.getString("CountryCode"));
         city.setDistrict(rs.getString("District"));
         city.setPopulation(rs.getInt("Population"));
         return city;

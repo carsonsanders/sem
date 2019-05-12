@@ -11,11 +11,9 @@ import java.util.ArrayList;
 @SpringBootApplication
 @RestController
 
-public class App
-{
+public class App {
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Create new Application
         App a = new App();
         // Connect to database
@@ -28,7 +26,9 @@ public class App
             a.connect(args[0]);
         }
 
-        
+       PrintReports rep = new PrintReports();
+        rep.citiesInWorldReport();
+
     }
 
     public static Connection con = null;
@@ -36,8 +36,7 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public static void connect(String location)
-    {
+    public static void connect(String location) {
         try
         {
             // Load Database driver
@@ -79,8 +78,7 @@ public class App
     /**
      * Disconnect from the MySQL database.
      */
-    public static void disconnect()
-    {
+    public static void disconnect() {
         if (con != null)
         {
             try
@@ -95,4 +93,21 @@ public class App
         }
     }
 
+    public void welcomeScreen() {
+
+        //Display main menu options
+        System.out.println("\n");
+        System.out.println("Welcome!");
+        System.out.println("\n");
+        System.out.println("Would you like a population report on..");
+        System.out.println("1. All the countries in...");
+        System.out.println("2. All the cities in...");
+        System.out.println("3. All the capital cities in...");
+        System.out.println("Press 'x' to exit");
+
+    }
+
 }
+
+
+
