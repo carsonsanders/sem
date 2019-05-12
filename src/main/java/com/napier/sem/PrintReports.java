@@ -9,17 +9,17 @@ public class PrintReports {
         //Check that there is data to display
         if (cou.getCountries("world") != null) {
             //If there is data to display, display data in table format
-            System.out.println("-----------------------------------------------------------------------------------------------------------------");
-            System.out.printf("%s %37s %15s %25s %10s %13s", "Code", "Country", "Continent", "Region", "Population", "Capital");
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.printf("%s %40s %30s %35s %25s %15s", "Code", "Country", "Continent", "Region", "Population", "Capital");
             System.out.println();
-            System.out.println("-----------------------------------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
             for (int i = 0; i < cou.getCountries("world").size(); i++) {
-                System.out.format("%s %37s %15s %25s %10s %13s", cou.getCountryList().get(i).getCode(), cou.getCountryList().get(i).getName(),
+                System.out.format("%s %40s %30s %35s %25s %15s", cou.getCountryList().get(i).getCode(), cou.getCountryList().get(i).getName(),
                         cou.getCountryList().get(i).getContinent(), cou.getCountryList().get(i).getRegion(), cou.getCountryList().get(i).getPopulation(),
                         cou.getCountryList().get(i).getCapital());
                 System.out.println();
             }
-            System.out.println("-----------------------------------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
         }
         //If there is no data to display, print error message
         else {
@@ -33,17 +33,17 @@ public class PrintReports {
             //Check that there is data to display
             if (ci.getCities("world") != null) {
                 //If there is data to display, display data in table format
-                System.out.println("-----------------------------------------------------------------------------------------------------------------");
-                System.out.printf("%s %s-20 %s-25 %25s", "Name", "Country Code", "District", "Population");
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.printf("%s %40s %30s %30s", "Name", "Country Code", "District", "Population");
                 System.out.println();
-                System.out.println("-----------------------------------------------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 for (int i = 0; i < ci.getCities("world").size(); i++) {
-                    System.out.format("%s %s-20 %s-25 %25s", ci.getCityList().get(i).getName(),
+                    System.out.format("%s %40s %30s %30s", ci.getCityList().get(i).getName(),
                             ci.getCityList().get(i).getCountry(), ci.getCityList().get(i).getDistrict(),
                             ci.getCityList().get(i).getPopulation());
                     System.out.println();
                 }
-                System.out.println("-----------------------------------------------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
             }
             //If there is no data to display, print error message
             else {
